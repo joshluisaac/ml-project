@@ -1,0 +1,17 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Goodfellow et~al.]{Goodfellow, Bengio, Courville \harvardand\
+  Bengio}{2016}{goodfellow2016deep}
+Goodfellow, I., Bengio, Y., Courville, A. \harvardand\ Bengio, Y.
+  \harvardyearleft 2016\harvardyearright , {\em Deep learning}, Vol.~1, MIT
+  press Cambridge.
+
+\harvarditem{Murphy}{2012}{Murphy2012}
+Murphy, K.  \harvardyearleft 2012\harvardyearright , {\em Machine learning, a
+  probabilistic perspective}, The MIT Press.
+
+\harvarditem{Shimodaira}{2014}{shimodaira2014text}
+Shimodaira, H.  \harvardyearleft 2014\harvardyearright , `Text classification
+  using naive bayes', {\em Learning and Data Note} {\bf 7},~1--9.
+
+\end{thebibliography}

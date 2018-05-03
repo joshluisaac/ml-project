@@ -1,0 +1,18 @@
+\begin{thebibliography}{xx}
+
+\harvarditem{Adams}{1995}{adams1995hitchhiker}
+Adams, D.  \harvardyearleft 1995\harvardyearright , {\em The Hitchhiker's Guide
+  to the Galaxy}, San Val.
+\newline\harvardurl{http://books.google.com/books?id=W-xMPgAACAAJ}
+
+\harvarditem{Dirac}{1981}{dirac}
+Dirac, P. A.~M.  \harvardyearleft 1981\harvardyearright , {\em The Principles
+  of Quantum Mechanics}, International series of monographs on physics,
+  Clarendon Press.
+
+\harvarditem{Einstein}{1905}{einstein}
+Einstein, A.  \harvardyearleft 1905\harvardyearright , `{Zur Elektrodynamik
+  bewegter K{\"o}rper}. ({German}) [{On} the electrodynamics of moving
+  bodies]', {\em Annalen der Physik} {\bf 322}(10),~891--921.
+
+\end{thebibliography}

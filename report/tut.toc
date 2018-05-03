@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {0.1}\textbf {Introduction}}{2}
+\contentsline {subsection}{\numberline {0.1.1}Subsection}{2}
+\contentsline {section}{\numberline {0.2}\textbf {Naive Bayes Classifiers}}{2}
+\contentsline {subsection}{\numberline {0.2.1}Bernoulli Naives Bayes}{2}
+\contentsline {subsection}{\numberline {0.2.2}Gaussian Naives Bayes}{2}
+\contentsline {subsection}{\numberline {0.2.3}Multinomial Naive Bayes}{2}
+\contentsline {section}{\numberline {0.3}\textbf {Motivation}}{3}
