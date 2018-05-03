@@ -13,7 +13,7 @@ from sklearn.metrics import accuracy_score
 
 from sklearn import svm
 
-url = "/home/joshua/Desktop/datascience/data_analysis_2/data_set.csv"
+url = "../../datafiles/customer_payment_data.csv"
 
 # Assign colum names to the dataset
 names = ['CustomerId_PKEY','CustomerName_OPT','InvoiceDate_NN','InvoiceStatus_OPT','label']
@@ -23,7 +23,7 @@ dataset = pd.read_csv(url, sep='|', names=names)
 
 #gnb = GaussianNB()
 
-gnb = svm.SVC()
+Model = svm.SVC()
 
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, 4].values
@@ -33,10 +33,11 @@ features_train, features_test, target_train, target_test = train_test_split(X, y
 #gnbClf.fit(X,y)
 #pred = gnbClf.predict([[1,1,1,1]])
 
-model = gnb.fit(features_train,target_train)
-target_pred = gnb.predict(features_test)
+model = Model.fit(features_train,target_train)
+target_pred = Model.predict(features_test)
 
-print("New data point",gnb.predict([[1,0,0,0]]))
+print("New data point",Model.predict([[2,0,0,1]]))
+print("New data point",Model.predict([[1,1,1,1]]))
 
 accuracy = accuracy_score(target_test, target_pred, normalize = True)
 

@@ -44,13 +44,17 @@
 \contentsline {subsection}{\numberline {6.4.2}Result}{14}
 \contentsline {subsection}{\numberline {6.4.3}Analysis}{14}
 \contentsline {section}{\numberline {6.5}Experiment 3: Workload predication}{15}
-\contentsline {subsection}{\numberline {6.5.1}ETL application workload prediction}{15}
+\contentsline {subsection}{\numberline {6.5.1}ETL workload prediction}{15}
 \contentsline {subsubsection}{\numberline {6.5.1.1}Aims}{15}
 \contentsline {subsubsection}{\numberline {6.5.1.2}Procedure}{15}
 \contentsline {subsubsection}{\numberline {6.5.1.3}Result}{15}
 \contentsline {subsubsection}{\numberline {6.5.1.4}Analysis}{18}
 \contentsline {subsubsection}{\numberline {6.5.1.5}Model Evaluation}{18}
 \contentsline {section}{\numberline {6.6}Experiment 4: Anomaly detection}{18}
-\contentsline {subsection}{\numberline {6.6.1}Result}{18}
-\contentsline {subsection}{\numberline {6.6.2}Analysis}{18}
-\contentsline {chapter}{\numberline {7}\textbf {Conclusion and Discussion}}{19}
+\contentsline {subsection}{\numberline {6.6.1}Classification problem}{19}
+\contentsline {subsubsection}{\numberline {6.6.1.1}Aims}{19}
+\contentsline {subsubsection}{\numberline {6.6.1.2}Procedure}{19}
+\contentsline {subsubsection}{\numberline {6.6.1.3}Result}{19}
+\contentsline {subsubsection}{\numberline {6.6.1.4}Analysis}{20}
+\contentsline {subsubsection}{\numberline {6.6.1.5}Model Evaluation}{20}
+\contentsline {chapter}{\numberline {7}\textbf {Conclusion and Discussion}}{21}

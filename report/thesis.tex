@@ -34,6 +34,7 @@
 
 
 \begin{document}
+\def\code#1{\texttt{#1}}
 
 \maketitle
 \newpage
@@ -313,7 +314,7 @@ The results for predicting the future performance of the ETL application is pres
 	\begin{tabular}{|l|l|l|}
 		\hline
 		\textbf{Metric} & \textbf{Value} \\ \hline
-		Mean absoluate error (MAE):  &  3.21106048906 \\ \hline
+		Mean absolute error (MAE):  &  3.21106048906 \\ \hline
 		Mean squared error (MAE):   &  15.9477899498 \\ \hline
 		Root mean squared error (RMSE):   &  3.99346841102 \\ \hline
 		Constant/Intercept  &  92.54785537643912 \\ \hline
@@ -379,11 +380,91 @@ The accuracy of the model was evaluated using Root Mean Squared Error (RMSE), Me
 
 
 \section{Experiment 4: Anomaly detection}
-This
+The anomaly detection problem was formulated as a classification problem. It falls into a supervised classification problem because the task is to predict which class a new data point belongs. Gaussian Naive Bayes ( GNB) classifier and support vector machines (SVM) were used to predict the class/label of a new data point. The data set labels are grouped into the following 5 categories; 
 
-\subsection{Result} 
+\begin{itemize}
+	\item Valid: If an entry is valid, this requires no further investigation. 
+	\item Missing-Data: If an entry is missing.
+	\item Missing-Primary-Key: Primary key is missing.
+	\item Invalid: If an entry is invalid and will be rejected.
+	\item Invalid-Data-Load-Default: Invalid but defaults would be loaded.
+\end{itemize}
 
-\subsection{Analysis}
+\subsection{Classification problem}
+
+\subsubsection{Aims}
+This experiment aims to test if GNB and SVM can be applied to solve classification problems when trying to detect anomalous entries in a data set.
+
+\subsubsection{Procedure}
+
+\subsubsection{Result} 
+The results for predicting which class an entry in a data set falls into is presented in Tables \ref{tab_classPredDesc}, \ref{tab_accuracyScore} and \ref{tab_prediction}  
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		\textbf{Metric} & \textbf{CustomerIdPKEY} & \textbf{CustomerNameOPT} & \textbf{InvoiceDateNN} & \textbf{InvoiceStatusOPT} \\ \hline
+count   &     78.000000    &     78.000000  &     78.000000    &      78.000000 \\ \hline
+mean     &     1.076923    &      0.923077    &    0.923077    &       0.923077 \\ \hline
+std      &     0.619368    &      0.833849   &     0.734480      &     0.833849 \\ \hline
+min     &      0.000000    &      0.000000    &    0.000000       &    0.000000 \\ \hline
+25\%     &      1.000000    &      0.000000    &    0.000000     &      0.000000 \\ \hline
+50\%     &      1.000000     &     1.000000     &   1.000000       &    1.000000 \\ \hline
+75\%     &      1.000000      &    2.000000    &    1.000000      &     2.000000 \\ \hline
+max     &      2.000000     &     2.000000    &    2.000000     &      2.000000 \\ \hline		
+	\end{tabular}
+	\caption{Classification prediction statistical metrics}
+	\label{tab_classPredDesc}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Classification Model} & \textbf{Accuracy} & \textbf{Accuracy} \\ \hline
+			Gaussian Naive Bayes   &     0.92    &     92.30\%  \\ \hline
+			Support Vector Machine  &    0.73    &     73\%  \\ \hline
+	\end{tabular}
+		\caption{Accuracy for the different classifiers}
+		\label{tab_accuracyScore}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Data point} & \textbf{Classification Model} & \textbf{Label} \\ \hline
+		[2,0,0,1] & Gaussian Naive Bayes   &     Invalid-Data \\ \hline
+		[1,1,1,1] & Gaussian Naive Bayes   &     Valid \\ \hline
+		[2,0,0,1] & Support Vector Machine  &    Invalid-Data \\ \hline
+		[1,1,1,1] & Support Vector Machine  &    Invalid-Data \\ \hline
+	\end{tabular}
+	\caption{Classification of unseen data point}
+	\label{tab_prediction}
+\end{table}
+	
+\subsubsection{Analysis}
+
+The training set presents a couple of features which includes customerId, customerName, InvoiceDate, InvoiceStatus and label. The label colmun is what we are trying to predict. This column can hold one of the following values; Valid, Missing-Data, Invalid-Data, Missing-Data-PK, Invalid-Data-Load-Default. The other columns can only hold one of [0,1,2]. “0” implies that the entry is missing, “1” implies that the record is present while “2” denotes that the entry is invalid. There are certain rules in place depending on the column specification which is basically the data type and NULL constraints.  The individual values of each column is combined with the column specification to deduce the correct class or label. 
+
+\subsubsection*{Primary key field rules}
+A primary key field by definition cannot hold empty, NULL and invalid entries. Therefore a 0 or 2 is considered a rejected entry. Primary key fields have the suffix “PKEY” to their feature name.
+
+\subsubsection*{Optional field rules}
+An optional column has got the suffix “OPT” to it’s feature name. These fields could hold empty or NULL values by definition since they are optional. Invalid and bad entries will also be accepted but would be defaulted to the system default value depending on the data type specification. For example, an optional numeric field containing the value $24X7$ is by default an anomalous entry but given that this is an optional field it would be replaced with the system numeric default value. The default value for numeric field types is 0 while the default value for variable character types is NULL.
+
+\subsubsection*{Null constrained fields rules}
+As the name suggests null constrained fields cannot hold null or invalid entries. This is a very strict type and as such the entry is required and must be valid. A value of 0 or 2 is considered invalid and would be rejected.
+
+The data set was randomly sliced into test and train sets using a $test\_size$ parameter which was set to $0.33$. This means that 33\% of the original data is allocated to the test set while the remaining 67\% is assigned to the training set. Table \ref{tab_prediction} is the unknown data point we are trying to predict. After training our model we can use it to make meaningful predictions.
+
+\subsubsection{Model Evaluation}
+Table \ref{tab_accuracyScore} presents the accuracy score using both classifiers. The accuracy of both models was estimated using sklearn accuracy score. The Gaussian classification model has a better accuracy score compared to support vector machine. The Gaussian model had a 90\% chance of getting the prediction correct as opposed to SVM which is only correct 70\% of the time.
+
+
+
 
 
 \chapter{\textbf{Conclusion and Discussion}}
