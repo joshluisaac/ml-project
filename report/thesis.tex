@@ -15,10 +15,23 @@
 %\usepackage[style=authoryear]{biblatex}
 %\addbibresource{sample.bib}
 
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\leftmark}
+%\lhead{Guides and tutorials}
+\rfoot{\thepage}
+
+\usepackage{setspace}
+\doublespacing
+
 %end of document preamble
 
 \title{\textbf{Big-data analytics using rules-based techniques and machine learning to support business decisions}}
-\author{Joshua Uzochukwu Nwankwo}
+\author{Joshua Uzochukwu Nwankwo \\ Student ref: 16022703}
+
+
 %\author{Joshua Uzochukwu Nwankwo \thanks{funded by the ShareLaTeX team}}
 \date{April 2018}
 
@@ -40,22 +53,81 @@
 \newpage
 
 \begin{abstract}
-The following examples show how to produce Harvard style referencing using biblatex.
+Log and data files contain an immense amount of information about the current state of a system.
+The most common technique used by most system administrators and support executives is to manually define a set of catch phrases and strings such as ERROR, WARN or TRACE in an attempt to retrieve lines containing those words. These methods has been criticized as impractical and inefficient, depending heavily on pattern-matching which requires a lot of domain experience in writing regular expressions. This is in addition to relying on overly simplistic heuristics and making assumptions about the nature of these files. In this thesis, I have presented some techniques for predicting workload, understanding end-user affinity and detecting anomalies in IT systems by exploiting the intrinsic structures within these files. This project formulated workload prediction as a supervised regression problem and then goes on to develop a model for future predictions. Understanding end user's system usage pattern was framed as a time-series problem while anomaly detection was formulated as a supervised classification problem. Gaussian Naive Bayes (GNB) and Support Vector Machines (SVM) were used to address this classification problem and both methods were benchmarked against each other. My results suggest that Gaussian NB performs better and is more accurate than SVMs for classification problems of this sort.
 \end{abstract}
 
 \tableofcontents
 \newpage
 
 \chapter{Introduction}
-\section{Overview}
 \section{Motivation}
+Big Data refers to a large amount of raw data that has been collected, stored and analyzed. This data contains a huge wealth of information which can be effectively utilized by organizations to make better decisions. Much of big data is unstructured, that is they don't have any form of schema to them. This makes them very difficult for system
+administrators to analyse them. The traditional approaches used by most administrators is defining a set of rules which would then be used to build regular expressions for skimming through huge log files. However, this is approach is not scalable in the long run will need to be updated frequently to detect new anomalies. Both large and small companies are using big data and related analysis approaches as a way to gain more information to better support their company and serve their customers, benefiting from the advantages of big data.Therefore leveraging machine learning techniques for anomaly detection could potentially save time, resources and cost. The purpose of this project is to explore the applications of machine learning for anomaly detection thus supporting business decisions.
 \section{Project Objectives}
-\section{Thesis organisation}
+The objective of this thesis is to explore the use of machine learning techniques when diagnosing IT system faults, predicting anomalies based on historical data, data files and log files accumulated over a period of time. This project seeks to implement a solution for analysing huge data sets and harnessing that wealth of information using machine learning techniques for improving the decision making process.
+\section{Thesis Organisation}
+This thesis is organised into six chapters. The second chapter would present the business case, research questions and literature review on related research. The third chapter would give some theoretical and mathematical aspects that have been used during the course of this project. This chapter provide some theoretical underpinnings. The fourth chapter introduces the methodology, the procedure and steps that were used during the experiments. It also analyses and evaluates the results. Chapter 6 presents the conclusion to the project and future directions.
 
 \chapter{Background}
+\section{Introduction}
+The focus of this chapter is to introduce the general background of this project and thesis. Then, the research questions of this thesis will be stated followed by a brief summary of the methodology. The end of the chapter will present the thesis structure and relationship between the thesis chapters.
+\section{Big data and the problem of anomaly detection}
+The increasing complexity of information technology ( IT ) systems demands a correspondingly greater effort for systems management. Today, many systems management tasks such as system configuration, performance analysis, performance tuning, error handling, and availability management are often performed manually. This work can be time-consuming and error-prone. Moreover, it requires a growing number of highly skilled personnel, making IT systems costly. IBM for instance, as exploited the use of an autonomic computing initiative, which is a core element of IBM's e-business on demand strategy to addresses this problem by developing and providing powerful concepts for self-management, including new self-healing, self-protecting, self-optimizing, and self-configuring capabilities. The goal is to reduce the burden associated with the management and the operation of IT systems. Autonomic computing systems should simply work, repairing and tuning themselves as needed. This requires that such systems be able to protect themselves, to identify upcoming problems, and to make required reconfigurations dynamically in order to resolve problems.
+
+
+Technology companies such as Facebook, Google, eBay and Yahoo have used big data technology at scale for mining complex data sets. As such, other technology companies are harnessing big data related technologies to unlock a wealth of information in their own datasets (Hernández et al., 2017). These data sets includes both structured and semi structured data such as comma-separated values (CSV) file, database logs, emails, application event log files, network traffic logs and user activity logs. Identifying the root cause of application slowness/performance issues, insider or external network intruder activity and consumer purchase pattern are some of the useful information embedded within these data sets. These wealth of information is key to the survival and continuity of the business which those application serves. Product investment decision can be influenced by information hidden within these files. For example, a company’s product re-branding strategy or product profitability decision can be influenced by identifying consumer purchase patterns embedded within these log files. In addition, event log files is the right place to look when boosting system performance is key to improving user experience. Log files contains an audit trail of all actions performed by a system and are sometimes the only way to discover errors and exceptions in the underlying system \citep{zwietasch2014detecting}. 
+
+
+The value of these wealth of information are not without challenges this is due to advancement in technology and newly classified security challenges at the workplace, individuals with malicious intentions continue to improve their craft. Therefore, it becomes increasingly important to develop effective mechanisms and techniques to protect IT systems which serves the business from these challenges. Some of these measures includes improving our ability to spot errors that could potentially lead to incorrect computation, spot exceptions that would cause system downtime, improve our ability to detect anomalies and attacks which could lead to data theft and improving our ability to recommend "Next Best Action" to increase productivity of system administrators rather than all sorts of error-prone manual correlation analysis. One common problem with computing systems is the concept of detecting anomalies. Anomaly detection is extracting a set of patterns with a data set which do not conform to the regular behaviour and this is useful for monitoring the health of computing systems \citep{chandola2009anomaly}.  Traditionally, most log analytic tools use human based inspection and pattern-matching techniques to identify system anomalies. These techniques basically use a set known of predefined-patterns which has to be updated manually to capture all set of known exceptions \citep{ma2003log}. These technique is not scalable and completely fails with new emerging threats because it gets out-paced with the rate at which new exceptions are  generated.  In a paper titled “Machine Learning in Automated Text Categorization”, \cite{sebastiani2002machine} emphasised the flaws of a manual approach to Text Categorization (TC) stating that it increases cost in terms of hiring a knowledge expert to write the best set of pattern-matching rules and this approach is less accurate when compared to that achieved by a text classifier. \cite{zwietasch2014detecting} underscores the methods of identifying events within a log file, he suggested that using more sophisticated techniques based on pattern extraction (unsupervised learning) leads to more accurate results than any other human-based technique. Therefore a human-based approach to log analysis is far from intelligent because it heavily depends on some individual manually updating a set of pattern-matching keywords.
+
+
+Technical support executives, system administrators of enterprise applications heavily depend on alert and notification monitoring tools to ensure that all applications are up and running, detecting and deploying countermeasures to mitigate against cyber-attacks. In such complex environment time is of essence, every minute counts and the failure or attack of one subsystem could bring down the entire cluster of applications. This could affect end users, if those end users are customers it could have serious financial implications leading to losses in revenue. Supporting such complex systems could be very difficult, therefore a real-time (millisecond delay) alert and notification system which is intelligent enough to spot irregularities, preempt exceptions and recommend "Next Best Action" would not only save the business millions of dollars but would improve consumer experience and increase customer satisfaction.
+\section{Business Case}
+\subsection{Inefficiency and productivity of system administrators}
+System administrators have to debug, searching through millions of lines of log files. The complexity involved is time-consuming which potentially leads to inefficiency and less productivity.
+
+\subsection{Decline of front-end user(s) perception}
+Front-end system users constantly complain of errors as a result of missing records or incorrect data which came in as part of a faulty  ETL process. ETL cycle should be smart enough to preempt or flag and alert users of potential issues before they actually occur, that is preventive as opposed to reactive.
+
+\subsection{Product innovation and optimization}
+End users visit some pages and modules more than other modules, users get very frustrated when too much time is spent trying to reload a page.Using big-data analytics we could analyse event log files to understand end user affinity and browsing behavior. 
+
+\section{Research questions}
+On the premise of the project background and business case,the following research questions are formulated:
+
+\begin{itemize}
+	\item How can companies harness machine learning models to drive business decisions?
+	\item Can supervised learning techniques be used to predict an application workload?
+	\item Can Gaussian models be applied to solve classification problems when trying to identify anomalous records in a data set?
+	\item Can statistical methods be used to improve user experience by identifying frequently used modules?
+	\item Can time-series metrics be explored to identify system usage drops?
+\end{itemize}
+
+This project will attempt to answer these questions.
+
+\section{Related Research}
+An essential aspect of system monitoring includes troubleshooting and detecting computer systems issues within an information technology infrastructure. These infrastructures includes data centers, server farms and networked environments. Sometimes these systems perform poorly, render missing or incorrect information or very often crash to a halt due to variable number of factors. The task of detecting the cause of failure which is often referred to as anomaly detection involves gathering huge amounts of data and making sense of such information. This information is considered the number one source of truth when investigation “what went wrong”. Network activity logs, system event logs, CPU/memory utilization logs and data files are some of the places to look when an issue occurs; and are considered a vital source of information when diagnosing information systems related issues \citep{saneifar2009mining}.
+
+\subsection{Feature extraction}
+
+Log analysis using machine learning techniques requires input of some sort a s numerical feature vector representations. One of the biggest challenges with log analysis is feature vector extraction which is basically the conversion of log files which are mostly in textual forms to numerical vector representations \citep{oliner2012advances}. This is because most machine learning models only accept numbers as opposed to texts. To address this problem, \cite{zheng2009system} presented a method which involves three integrated steps during the log preprocessing phase in an attempt to increase the number of extracted features for failure prediction when analysing log files. While the author claimed this method was effective in identifying failure patterns, the study did not address the problem of dimensionality reduction. \cite{lim2008log} discovered that extracting unique messages in log files could increase the number of extracted features which could potentially increase dimensionality. They proposed a method to address this problem by replacing features such as URL, dates, timestamps, memory and IP address locations with generic characters. This procedure is known as \textbf{de-parameterization}. In their experiment, \cite{lim2008log} also utilized similar techniques by replacing all recurring numeric characters with generic replacements in an attempt to address the dimensionality problem. 
+
+\cite{xu2009detecting} is a major critic of de-parameterization approach to addressing the dimensionality problem. This technique was criticized because it requires prior knowledge of the log file structure, requires skill,a good understanding of regular expressions (REGEX), it is error prone because important features could also be removed during de-parameterization and if certain parameters aren’t captured could lead to an exponential increase in feature dimensionality. 
+
+In recent deep learning techniques is gaining traction and have become more prevalent in handing Natural Language Processing (NLP) related tasks.  \cite{bertero2017experience} took this completely different approach to feature extraction transitioning from traditional NLP techniques to recent advances in NLP by processing huge log files and textual documents as regular texts and transforming those words as a dense vector representation of those words. This technique is known as \textbf{word embedding}. This technique is synonymous with representing a man as a person and a king and queen as royalty. \cite{ruder2016overview} considers this one of the newest applications of unsupervised learning but do have some drawbacks. Some of the biggest challenges with word embeddings is the inability to handle unknown or out-of-vocabulary (OOV) words and an inability to represent words at sub levels. For example, if a word embedding model hasn’t seen a word before, it has no idea of how to interpret such words or how to translate those words into a vector space. In word embeddings, every word is an independent vector. Therefore, words ending with “less” which indicates the absence of something, like “dimensionless” or “frictionless” are treated as independent words.\cite{xu2009detecting} then proposed a composite key technique which is basically a combination of certain keys in the log messages to produce a composite numerical feature vector.  
+
+\subsection{Anomaly detection}
+The goal of modeling IT systems is so that predicting future problems reoccurrence and detecting anomalies could be less challenging. The most common technique used by most system administrators and support executives is to manually define a set of strings such as ERROR, WARN or TRACE in an attempt to retrieve lines containing those words. \cite{mariani2008automated} criticized the impracticality of this approach because of how fast these log files grows and the unstructured format of these log files, the study presented a methodology which depended heavily on pattern-matching and rule based techniques using regular expressions. They are known to perform poorly because it scans through all records in a log file both relevant and irrelevant entries aside from the fact that pattern-matching and regular expressions requires an expert who has got a lot of domain knowledge on script programming. 
+
+As pointed out by \cite{sebastiani2002machine}, this technique is not efficient and less elastic for many reasons. Some of which includes, domain experience requirement of how to develop regular expressions; changes to the log file structure would cause existing failure of existing regular expressions which would ultimately require the development of new rules to cater for recent changes; rule-based techniques is not maintainable in the long-run because an expert with domain experience could end up developing hundreds of these regular expressions to handle the different cases that are present in the log file and lastly, it is time-consuming, time spent developing and writing regular expressions could be spent doing something else. In their recent paper titled “Representation Learning for Resource Usage Prediction”, \cite{schmidt2018representation} criticized this heuristics based approach because it is a one-size-fit-all solution which is generally applied to all IT systems regardless of the specifics of the situation aside from the fact that it overly simplifies the nature of the task and makes assumptions about the statistics and state of the system.
+
+Recent developments in the field of statistics, data analysis has brought us closer to developing efficient algorithms and models that out perform generic methods which are obviously based on overly simplistic heuristics and assumptions. Over the years, the heuristic based approach has gained less traction with the introduction of machine learning (supervised, unsupervised and semi-supervised). One benefit of this transition is that it requires less human intervention and is less error prone. Anomaly detection using machine learning techniques enables us to build models for differentiating between normal and abnormal situations \citep{chandola2009anomaly}. One major drawback of this technique is that it assumes that the data size of what constitutes a normal situation must be significantly larger than problematic instances, otherwise the margin of error would increase and the model accuracy would be incorrect.
+
 
 \chapter{Theoretical and Mathematical Aspects}
 \section{Introduction}
+This purpose of this chapter is to provide some theoretical and mathematical underpinnings which lays the ground work for this project.
 \section{Probability and Information Theory}
 Machine learning deals with uncertain or stochastic(non-deterministic) quantities. Stochasticity and uncertainty arise from various sources. \cite{goodfellow2016deep} summarised incomplete information about the system being modeled \textbf{incomplete modeling}; the inability to observe all the variables and factors that influence the behaviour of a system \textbf{incomplete observability}; and gaps or unknowns within the system being modeled \textbf{inherent stochasticity} as the three possible sources of uncertainty in machine learning.\\
 The goal of machine learning is to predict the chance, likelihood or possibility that an event will occur given that similar events had already occurred. \cite{Murphy2012} described machine learning as a set of methods used to predict future occurrences or used to drive the decision making process where a level of uncertainty exists, uncovering and exploiting patterns in a previously examined event.A mathematical framework for representing, quantifying and deriving uncertainty is known as the probability theory \citep{goodfellow2016deep}  
@@ -104,14 +176,27 @@ $$100 - 95.15 = 8.85\%$$
 
 This implies that the probability of a database query taking over 60 seconds is $0.0885$ or $8.85\%$
 
-\section{Machine Learning Algorithms}
-\section{K-means Clustering}
-\subsection{Euclidean Distance}
-\section{Naive Bayes Classifier}
-\subsection{Gaussian Naive Bayes}
-\subsection{Bernoulli Naive Bayes}
+\section{Euclidean Distance}
+This is a widely used machine learning technique used for calculating the distance between two data points on a plane. Machine learning models such as K-means and K-nearest Neighbor (KNN) relies heavily on euclidean distance to derive the similarities between two sets of data points. Other metrics for calculating distances exits such as Manhattan, Minkowski and Chebyshev distances but most ML models use Euclidean distance.\\
+The distance between two sets of data points (x,y) and (a,b) is mathematically denoted as:
+$$ dist((x, y), (a, b)) = \sqrt{(x - a)^2 + (y - b)^2}$$
+
+\section{Gaussian Naive Bayes}
+Gaussian Naive Bayes (GNB) is a supervised learning algorithm which is best suited for addressing the classification problem. This model is based on Bayes probability theorem. Bayes theorem provides a way of calculating posterior probability $P(c|x)$ from $P(c), P(x)$ and $P(x|c)$. This model is fast, efficient, easy to implement and particularly useful for very large data sets. Along with simplicity, Naive Bayes is known to outperform even highly sophisticated classification methods.
+
+Bayes’ Theorem is stated as:
+$$P(h|d) = (P(d|h) * P(h)) / P(d)$$
+Where\\
+$P(h|d)$ is the probability of hypothesis h given the data d. This is called the posterior probability.\\
+$P(d|h)$ is the probability of data d given that the hypothesis h was true.\\
+$P(h)$ is the probability of hypothesis h being true (regardless of the data). This is called the prior probability of h.\\
+$P(d)$ is the probability of the data (regardless of the hypothesis).\\
+You can see that we are interested in calculating the posterior probability of $P(h|d)$ from the prior probability $p(h)$ with P(D) and $P(d|h)$.
+
+
+\section{Bernoulli Naive Bayes}
 One implementation of the Naive Bayes classifier is the Bernoulli Naive Bayes classifier. It is modeled as a Bernoulli distribution. Bernoulli NB classifier assumes that all the features present in the data frame can be represented as boolean or binary values. Since Bernoulli NB classifier assumes that the data is distributed in accordance to multivariate Bernoulli distribution, this implies that each data point is a binary vector \citep{shimodaira2014text}.\\
-In the implementation and methodology section I have discussed how this model has been applied during the data transformation phase. The process basically involves reconstructing the raw data input into a Bernoulli vector. The possible outcome for each data point is denoted as $$x = \{0,1\}$$\\ 
+In the experiments and results section I have discussed how this model has been applied during the data transformation phase. The process basically involves reconstructing the raw data input into a Bernoulli vector. The possible outcome for each data point is denoted as $$x = \{0,1\}$$\\ 
 
 It is worth noting that all Bernoulli distributions are Binomial distributions. In fact Bernoulli distributions are a special case of Binomial distributions where the number of trials $n=1$\\
 
@@ -123,39 +208,25 @@ then the probability distribution of the random variable $X$ is a Bernoulli dist
 
 If $X=X_1+\cdots+X_n$ and each of $X_1,\ldots,X_n$ has a Bernoulli distribution with the same value of $p$ and they are independent, then $X$ has a binomial distribution, and the possible values of $X$ are $\{0,1,2,3,\ldots,n\}$.  If $n=1$ then that binomial distribution is a Bernoulli distribution.
 
-\subsubsection*{What is a Bernoulli Random Variable?}
+\subsection*{What is a Bernoulli Random Variable?}
 A Bernoulli random variable is one that has one of two possible outcomes.That is, a random variable $X$ is one that satisfies the condition $P(X=1) = p$ or it's complement $P(X=0) = 1 - p$ 
 
-\subsection{Multinomial Naive Bayes}
 
-
-
-\section{Decision Trees}
-\section{Selection of Features}
 \section{Data File Vectorization}
-One major challenge with machine learning algorithms is the inability to handle raw textual input. Source files, system, console and web server logs all come in plain text format. They cannot be used in this raw form for analytics and machine learning. Most learning algorithms take input features as numeric vectors. Therefore,conversion of textual documents into vector forms is a required step. The technique used to transform text elements in data sets into numeric vectors is known as \textbf{text vectorization}. Bag-of-words, Boolean Existential and Fuzzy Relevance Matrix are some vectorization models which could be used.
+One major challenge with machine learning algorithms is the inability to handle raw textual input. Source files, system, console and web server logs all come in plain text format. They cannot be used in this raw form for analytics and machine learning. Most learning algorithms take input features as numeric vectors. Therefore,conversion of textual documents into vector forms is a required step. The technique used to transform text elements in data sets into numeric vectors is known as \textbf{text vectorization}. Bag-of-words and Boolean Existential are some vectorization models which could be used.
 \subsection{Word Count Frequency Approach}
 This technique is also known as the \textbf{bag-of-words} model. It involves counting and representing each word in the document as a vector space. A document-term matrix (DTM) is first constructed for each word. Each row in the DTM corresponds to the data file or raw document while each column corresponds to the terms. In text vectorization we often use terms as opposed to words.
 \subsection{Boolean Existential Approach}
 This model is used to represents each word in the document as a logical or boolean matrix. The raw input is validated using certain rules and criteria, if that condition is met, then the value is set to 1 otherwise it is assigned the default value of 0. Each cell in the matrix can only hold one value which must either be 0 or 1, these are the only possible entries this matrix can hold.
-\subsection{Fuzzy Relevance Matrix}
-
-This project adopted  xxxx and xxx vectorization approach 
-
-
-
-\section{Summary}
-
-
 
 \newpage
-\chapter{\textbf{Methodology}}
+\chapter{Methodology}
 
 \section{Introduction}
-This chapter details the procedure used to attain the stated objectives. It describes what has been done to address this problems. It starts off by presenting the various machine learning algorithms that were used during the course of this project, it also justifies the rationale behind some of the adopted design decisions. This chapter elucidates the evaluation techniques used to validate the accuracy and correctness of the applied machine learning algorithms.
+This chapter details the procedure used to attain the stated objectives. It describes what has been done to address this problems. It starts off by presenting the general framework for analysing textual documents and the various techniques that were used.
 
 \section{The General Framework for Mining and Analysing data files}
-Ref presented a series of steps used mining and analysing console logs. This procedure would form the general framework for analysing log and data files presented in this project. The framework features 4 steps for mining console logs. These steps includes converting each lines or messages from an unstructured text to a data structure log parsing; converting the data structure to a numeric vector, this step is known as vectorization or feature extraction; applying machine learning techniques to identify patterns, anomalies and clusters machine learning; and an intuitive presentation of the identified patterns using graphs and other visual metrics visualization.
+\cite{xu2010system} presented a series of steps used mining and analysing console logs. This procedure would form the general framework for analysing log and data files presented in this project. The framework features four steps for mining console logs. These steps includes converting each lines or messages from an unstructured text to a data structure log parsing; converting the data structure to a numeric vector, this step is known as vectorization or feature extraction; applying machine learning techniques to identify patterns, anomalies and clusters machine learning; and an intuitive presentation of the identified patterns using graphs and other visual metrics visualization.
 
 
 \section{Data Representation and Preprocessing Phase}
@@ -178,12 +249,7 @@ The benefits counts and term frequency vectorization techniques cannot be overem
 A work around for this is to hash the terms. Hashing is a technique used to convert strings and texts to numeric representations. The main idea behind hashing is that a term is converted into an integer  which is then fed into the machine learning algorithm. One disadvantage of this approach is is that it is a one-way hash, this means that when a text is converted into an hash representation it cannot be reversed back to it’s original text.
 
 
-\chapter{\textbf{System Design and Implementation}}
-
-\section{Log File Preprocessing}
-
-
-\chapter{\textbf{Results}}
+\chapter{Results}
 
 \section{Introduction}
 This chapter presents results from the performed experiments. A successful log analyzer identify known and unknown anomalies in a data and log file by observing patterns using machine learning techniques.  The result from improving site design and user experience by analysing the hit rate is presented first, K-means data clustering techniques used to predict system performance based on the running time and number of records processed is presented second, followed by detecting anomalies in data files using rule and decision based techniques is presented after.
@@ -220,9 +286,9 @@ The following procedures were adopted.
 
 \subsection{Analysis}
 
-The result for experiment 1, Counting web module hit rate per day are presented in table \ref{hit rate} and illustrated in figure XXX. The results shows that phone calls have the highest hit rate of 6000 while promise to pay (PTP) module has the second highest hit rate of 4230 followed by SMS with a hit rate of 3010. This results suggests that more end users are visiting the call module and making phone calls to customers more than any other functionality. The result of this experiment is used for clustering during the second experiment to understand application or module usage pattern per day. This is an important business metric which could be used to identify module usage drops beyond a certain threshold.
+The result for experiment 1, Counting web module hit rate per day are presented in table \ref{hit rate}. The results shows that phone calls have the highest hit rate of 6000 while promise to pay (PTP) module has the second highest hit rate of 4230 followed by SMS with a hit rate of 3010. This results suggests that more end users are visiting the call module and making phone calls to customers more than any other functionality. The result of this experiment is used for clustering during the second experiment to understand application or module usage pattern per day. This is an important business metric which could be used to identify module usage drops beyond a certain threshold.
 
-\section{Experiment 2: Understanding usage pattern by applying K-means clustering algorithm}
+\section{Experiment 2: Understanding usage pattern by using time-series}
 
 \subsection{Procedure}
 We have adopted the same procedure as those used in experiment 1 with additional steps.
@@ -233,7 +299,7 @@ We have adopted the same procedure as those used in experiment 1 with additional
 
 \subsection{Result} 
 The data file used for this analysis consists of two columns, the first column is the day in which the call was made and the second column is the total number of calls made per day while the last column is the probability density function which is basically the dependent variable p(x). 
-The raw data set is uploaded to my github repository, you could retrieve it using this link.
+The raw data set is uploaded to my github repository, you could retrieve it using this "https://github.com/joshluisaac/phd-thesis/tree/master/datafiles".
 The results for detecting drops in the daily number of calls made is presented in table \ref{exp2_tab1}  and illustrated in figure \ref{exp2_fig1} and \ref{exp2_fig2}. The table is a summary of the mean and standard deviation derived from the data set.
 
 \begin{table}[h!]
@@ -279,11 +345,6 @@ The workload prediction problem comprises of ETL application workload and disk s
 \subsubsection{Aims}
 The aim of this experiment is to test whether supervised regression models could be used to predict the future performance of an application based on continuous input variables. 
 
-\subsubsection{Procedure}
-
-\begin{itemize}
-	\item 
-\end{itemize}
 
 \subsubsection{Result} 
 The results for predicting the future performance of the ETL application is presented in Tables \ref{workloadPredDesc}, \ref{regresModelEval100} \& \ref{actualPred100} and illustrated in Figures \ref{fig_workloadPred100} and \ref{fig_workloadPred200}. Plotted on the x-axis is the running time and on the y-axis is the through put per second. The y-axis is the output/response we want to predict.
@@ -395,8 +456,6 @@ The anomaly detection problem was formulated as a classification problem. It fal
 \subsubsection{Aims}
 This experiment aims to test if GNB and SVM can be applied to solve classification problems when trying to detect anomalous entries in a data set.
 
-\subsubsection{Procedure}
-
 \subsubsection{Result} 
 The results for predicting which class an entry in a data set falls into is presented in Tables \ref{tab_classPredDesc}, \ref{tab_accuracyScore} and \ref{tab_prediction}  
 
@@ -467,8 +526,12 @@ Table \ref{tab_accuracyScore} presents the accuracy score using both classifiers
 
 
 
-\chapter{\textbf{Conclusion and Discussion}}
-
+\chapter{Discussion and Conclusion}
+\section{Discussion}
+The presented results in the previous chapters seem to suggest that anomaly detection and workload prediction is viable using machine learning techniques. I presented results from a series of experiments conducted in an attempt to test a formulated hypothesis. A total of five experiments were conducted all exploiting machine learning models. End user affinity and understanding the user’s behaviour  was formulated as a time-series problem, workload prediction was framed as a supervised univariate regression problem while anomaly detection in data files was formulated as a supervised classification problem in which I explored two classification models, Gaussian classifier and support vector machines. 33\% of the total data set was allocated to the test set, the results seem to suggest that Gaussian classifier was more accurate than SVMs when dealing with a multinomial feature vector.  
+\section{Conclusion}
+For a fact log files contain an immense amount of information for system monitoring and troubleshooting but aren’t sufficiently utilized by system administrators. In this project I have presented of automatically processing log and data files in an attempt to identify patterns, anomalies and weird behaviours. The two biggest challenges working with log and data files is the size and unstructured nature of these files. These two challenges were addressed in the methodology and experimentation sections during the data cleansing and preprocessing phases. This phase basically involves parsing and extracting useful content. The result of this is a significant reduction in the amount of data that is required for subsequent phases. Just as \cite{xu2010system} iterated, analysing data and log files is a very practical business problem that shows up everyday in organizations that rely heavily on IT and computing systems. The data set used for this project all came from real-world production systems with sizes ranging from megabytes to gigabytes. 
+My experiments reveal that system administrators and IT support executives can gain deeper and meaningful insights by using machine learning techniques to analyse log and data files which seem impossible for humans. By exploiting the intrinsic structures in log and data, this work suggests that we could turn data and log files into reliant and accurate monitoring systems for making future predictions and anomaly detection, thereby supporting business decisions.
 
 \bibliographystyle{agsm}
 \bibliography{thesis}

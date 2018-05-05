@@ -1,17 +1,99 @@
 \begin{thebibliography}{xx}
 
+\harvarditem[Bertero et~al.]{Bertero, Roy, Sauvanaud \harvardand\
+  Tr{\'e}dan}{2017}{bertero2017experience}
+Bertero, C., Roy, M., Sauvanaud, C. \harvardand\ Tr{\'e}dan, G.
+  \harvardyearleft 2017\harvardyearright , Experience report: Log mining using
+  natural language processing and application to anomaly detection, {\em in}
+  `28th International Symposium on Software Reliability Engineering (ISSRE
+  2017)', p.~10p.
+
+\harvarditem[Chandola et~al.]{Chandola, Banerjee \harvardand\
+  Kumar}{2009}{chandola2009anomaly}
+Chandola, V., Banerjee, A. \harvardand\ Kumar, V.  \harvardyearleft
+  2009\harvardyearright , `Anomaly detection: A survey', {\em ACM computing
+  surveys (CSUR)} {\bf 41}(3),~15.
+
 \harvarditem[Goodfellow et~al.]{Goodfellow, Bengio, Courville \harvardand\
   Bengio}{2016}{goodfellow2016deep}
 Goodfellow, I., Bengio, Y., Courville, A. \harvardand\ Bengio, Y.
   \harvardyearleft 2016\harvardyearright , {\em Deep learning}, Vol.~1, MIT
   press Cambridge.
 
+\harvarditem[Lim et~al.]{Lim, Singh \harvardand\ Yajnik}{2008}{lim2008log}
+Lim, C., Singh, N. \harvardand\ Yajnik, S.  \harvardyearleft
+  2008\harvardyearright , A log mining approach to failure analysis of
+  enterprise telephony systems, {\em in} `Dependable Systems and Networks With
+  FTCS and DCC, 2008. DSN 2008. IEEE International Conference on', IEEE,
+  pp.~398--403.
+
+\harvarditem{Ma}{2003}{ma2003log}
+Ma, P.  \harvardyearleft 2003\harvardyearright , `Log analysis-based intrusion
+  detection via unsupervised learning', {\em School of Informatics University
+  of Edinburgh} pp.~1--70.
+
+\harvarditem{Mariani \harvardand\ Pastore}{2008}{mariani2008automated}
+Mariani, L. \harvardand\ Pastore, F.  \harvardyearleft 2008\harvardyearright ,
+  Automated identification of failure causes in system logs, {\em in} `Software
+  Reliability Engineering, 2008. ISSRE 2008. 19th International Symposium on',
+  IEEE, pp.~117--126.
+
 \harvarditem{Murphy}{2012}{Murphy2012}
 Murphy, K.  \harvardyearleft 2012\harvardyearright , {\em Machine learning, a
   probabilistic perspective}, The MIT Press.
 
+\harvarditem[Oliner et~al.]{Oliner, Ganapathi \harvardand\
+  Xu}{2012}{oliner2012advances}
+Oliner, A., Ganapathi, A. \harvardand\ Xu, W.  \harvardyearleft
+  2012\harvardyearright , `Advances and challenges in log analysis', {\em
+  Communications of the ACM} {\bf 55}(2),~55--61.
+
+\harvarditem{Ruder}{2016}{ruder2016overview}
+Ruder, S.  \harvardyearleft 2016\harvardyearright , `An overview of gradient
+  descent optimization algorithms', {\em arXiv preprint arXiv:1609.04747} .
+
+\harvarditem[Saneifar et~al.]{Saneifar, Bonniol, Laurent, Poncelet \harvardand\
+  Roche}{2009}{saneifar2009mining}
+Saneifar, H., Bonniol, S., Laurent, A., Poncelet, P. \harvardand\ Roche, M.
+  \harvardyearleft 2009\harvardyearright , Mining for relevant terms from log
+  files, {\em in} `KDIR'09: International Conference on Knowledge Discovery and
+  Information Retrieval', pp.~77--84.
+
+\harvarditem[Schmidt et~al.]{Schmidt, Niepert \harvardand\
+  Huici}{2018}{schmidt2018representation}
+Schmidt, F., Niepert, M. \harvardand\ Huici, F.  \harvardyearleft
+  2018\harvardyearright , `Representation learning for resource usage
+  prediction', {\em arXiv preprint arXiv:1802.00673} .
+
+\harvarditem{Sebastiani}{2002}{sebastiani2002machine}
+Sebastiani, F.  \harvardyearleft 2002\harvardyearright , `Machine learning in
+  automated text categorization', {\em ACM computing surveys (CSUR)} {\bf
+  34}(1),~1--47.
+
 \harvarditem{Shimodaira}{2014}{shimodaira2014text}
 Shimodaira, H.  \harvardyearleft 2014\harvardyearright , `Text classification
   using naive bayes', {\em Learning and Data Note} {\bf 7},~1--9.
+
+\harvarditem{Xu}{2010}{xu2010system}
+Xu, W.  \harvardyearleft 2010\harvardyearright , {\em System problem detection
+  by mining console logs}, University of California, Berkeley.
+
+\harvarditem[Xu et~al.]{Xu, Huang, Fox, Patterson \harvardand\
+  Jordan}{2009}{xu2009detecting}
+Xu, W., Huang, L., Fox, A., Patterson, D. \harvardand\ Jordan, M.~I.
+  \harvardyearleft 2009\harvardyearright , Detecting large-scale system
+  problems by mining console logs, {\em in} `Proceedings of the ACM SIGOPS 22nd
+  symposium on Operating systems principles', ACM, pp.~117--132.
+
+\harvarditem[Zheng et~al.]{Zheng, Lan, Park \harvardand\
+  Geist}{2009}{zheng2009system}
+Zheng, Z., Lan, Z., Park, B.~H. \harvardand\ Geist, A.  \harvardyearleft
+  2009\harvardyearright , System log pre-processing to improve failure
+  prediction, {\em in} `Dependable Systems \& Networks, 2009. DSN'09. IEEE/IFIP
+  International Conference on', IEEE, pp.~572--577.
+
+\harvarditem{Zwietasch}{2014}{zwietasch2014detecting}
+Zwietasch, T.  \harvardyearleft 2014\harvardyearright , Detecting anomalies in
+  system log files using machine learning techniques, {B.S.} thesis.
 
 \end{thebibliography}

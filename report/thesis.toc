@@ -1,60 +1,59 @@
-\contentsline {chapter}{\numberline {1}Introduction}{3}
-\contentsline {section}{\numberline {1.1}Overview}{3}
-\contentsline {section}{\numberline {1.2}Motivation}{3}
-\contentsline {section}{\numberline {1.3}Project Objectives}{3}
-\contentsline {section}{\numberline {1.4}Thesis organisation}{3}
-\contentsline {chapter}{\numberline {2}Background}{4}
-\contentsline {chapter}{\numberline {3}Theoretical and Mathematical Aspects}{5}
-\contentsline {section}{\numberline {3.1}Introduction}{5}
-\contentsline {section}{\numberline {3.2}Probability and Information Theory}{5}
-\contentsline {section}{\numberline {3.3}Z-score Model}{5}
-\contentsline {subsection}{\numberline {3.3.1}Importance of Z-scores}{5}
-\contentsline {subsection}{\numberline {3.3.2}Applications of Z-scores}{6}
-\contentsline {section}{\numberline {3.4}Machine Learning Algorithms}{6}
-\contentsline {section}{\numberline {3.5}K-means Clustering}{6}
-\contentsline {subsection}{\numberline {3.5.1}Euclidean Distance}{6}
-\contentsline {section}{\numberline {3.6}Naive Bayes Classifier}{6}
-\contentsline {subsection}{\numberline {3.6.1}Gaussian Naive Bayes}{6}
-\contentsline {subsection}{\numberline {3.6.2}Bernoulli Naive Bayes}{6}
-\contentsline {subsection}{\numberline {3.6.3}Multinomial Naive Bayes}{7}
-\contentsline {section}{\numberline {3.7}Decision Trees}{7}
-\contentsline {section}{\numberline {3.8}Selection of Features}{7}
-\contentsline {section}{\numberline {3.9}Data File Vectorization}{7}
-\contentsline {subsection}{\numberline {3.9.1}Word Count Frequency Approach}{7}
-\contentsline {subsection}{\numberline {3.9.2}Boolean Existential Approach}{8}
-\contentsline {subsection}{\numberline {3.9.3}Fuzzy Relevance Matrix}{8}
-\contentsline {section}{\numberline {3.10}Summary}{8}
-\contentsline {chapter}{\numberline {4}\textbf {Methodology}}{9}
-\contentsline {section}{\numberline {4.1}Introduction}{9}
-\contentsline {section}{\numberline {4.2}The General Framework for Mining and Analysing data files}{9}
-\contentsline {section}{\numberline {4.3}Data Representation and Preprocessing Phase}{9}
-\contentsline {subsection}{\numberline {4.3.1}TF-IDF Numerical Representation}{10}
-\contentsline {subsection}{\numberline {4.3.2}Hashing Vectorizer}{10}
-\contentsline {chapter}{\numberline {5}\textbf {System Design and Implementation}}{11}
-\contentsline {section}{\numberline {5.1}Log File Preprocessing}{11}
-\contentsline {chapter}{\numberline {6}\textbf {Results}}{12}
-\contentsline {section}{\numberline {6.1}Introduction}{12}
-\contentsline {section}{\numberline {6.2}Analysing server log files for hit rate and usage patterns}{12}
-\contentsline {section}{\numberline {6.3}Experiment 1: Counting web module hit rate per day}{12}
-\contentsline {subsection}{\numberline {6.3.1}Procedure}{12}
-\contentsline {subsection}{\numberline {6.3.2}Result}{13}
-\contentsline {subsection}{\numberline {6.3.3}Analysis}{13}
-\contentsline {section}{\numberline {6.4}Experiment 2: Understanding usage pattern by applying K-means clustering algorithm}{13}
-\contentsline {subsection}{\numberline {6.4.1}Procedure}{13}
-\contentsline {subsection}{\numberline {6.4.2}Result}{14}
-\contentsline {subsection}{\numberline {6.4.3}Analysis}{14}
-\contentsline {section}{\numberline {6.5}Experiment 3: Workload predication}{15}
-\contentsline {subsection}{\numberline {6.5.1}ETL workload prediction}{15}
-\contentsline {subsubsection}{\numberline {6.5.1.1}Aims}{15}
-\contentsline {subsubsection}{\numberline {6.5.1.2}Procedure}{15}
-\contentsline {subsubsection}{\numberline {6.5.1.3}Result}{15}
-\contentsline {subsubsection}{\numberline {6.5.1.4}Analysis}{18}
-\contentsline {subsubsection}{\numberline {6.5.1.5}Model Evaluation}{18}
-\contentsline {section}{\numberline {6.6}Experiment 4: Anomaly detection}{18}
-\contentsline {subsection}{\numberline {6.6.1}Classification problem}{19}
-\contentsline {subsubsection}{\numberline {6.6.1.1}Aims}{19}
-\contentsline {subsubsection}{\numberline {6.6.1.2}Procedure}{19}
-\contentsline {subsubsection}{\numberline {6.6.1.3}Result}{19}
-\contentsline {subsubsection}{\numberline {6.6.1.4}Analysis}{20}
-\contentsline {subsubsection}{\numberline {6.6.1.5}Model Evaluation}{20}
-\contentsline {chapter}{\numberline {7}\textbf {Conclusion and Discussion}}{21}
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {section}{\numberline {1.1}Motivation}{4}
+\contentsline {section}{\numberline {1.2}Project Objectives}{4}
+\contentsline {section}{\numberline {1.3}Thesis Organisation}{5}
+\contentsline {chapter}{\numberline {2}Background}{6}
+\contentsline {section}{\numberline {2.1}Introduction}{6}
+\contentsline {section}{\numberline {2.2}Big data and the problem of anomaly detection}{6}
+\contentsline {section}{\numberline {2.3}Business Case}{9}
+\contentsline {subsection}{\numberline {2.3.1}Inefficiency and productivity of system administrators}{9}
+\contentsline {subsection}{\numberline {2.3.2}Decline of front-end user(s) perception}{9}
+\contentsline {subsection}{\numberline {2.3.3}Product innovation and optimization}{9}
+\contentsline {section}{\numberline {2.4}Research questions}{9}
+\contentsline {section}{\numberline {2.5}Related Research}{10}
+\contentsline {subsection}{\numberline {2.5.1}Feature extraction}{10}
+\contentsline {subsection}{\numberline {2.5.2}Anomaly detection}{12}
+\contentsline {chapter}{\numberline {3}Theoretical and Mathematical Aspects}{14}
+\contentsline {section}{\numberline {3.1}Introduction}{14}
+\contentsline {section}{\numberline {3.2}Probability and Information Theory}{14}
+\contentsline {section}{\numberline {3.3}Z-score Model}{15}
+\contentsline {subsection}{\numberline {3.3.1}Importance of Z-scores}{15}
+\contentsline {subsection}{\numberline {3.3.2}Applications of Z-scores}{15}
+\contentsline {section}{\numberline {3.4}Euclidean Distance}{16}
+\contentsline {section}{\numberline {3.5}Gaussian Naive Bayes}{16}
+\contentsline {section}{\numberline {3.6}Bernoulli Naive Bayes}{17}
+\contentsline {section}{\numberline {3.7}Data File Vectorization}{18}
+\contentsline {subsection}{\numberline {3.7.1}Word Count Frequency Approach}{19}
+\contentsline {subsection}{\numberline {3.7.2}Boolean Existential Approach}{19}
+\contentsline {chapter}{\numberline {4}Methodology}{20}
+\contentsline {section}{\numberline {4.1}Introduction}{20}
+\contentsline {section}{\numberline {4.2}The General Framework for Mining and Analysing data files}{20}
+\contentsline {section}{\numberline {4.3}Data Representation and Preprocessing Phase}{21}
+\contentsline {subsection}{\numberline {4.3.1}TF-IDF Numerical Representation}{21}
+\contentsline {subsection}{\numberline {4.3.2}Hashing Vectorizer}{22}
+\contentsline {chapter}{\numberline {5}Results}{23}
+\contentsline {section}{\numberline {5.1}Introduction}{23}
+\contentsline {section}{\numberline {5.2}Analysing server log files for hit rate and usage patterns}{23}
+\contentsline {section}{\numberline {5.3}Experiment 1: Counting web module hit rate per day}{24}
+\contentsline {subsection}{\numberline {5.3.1}Procedure}{24}
+\contentsline {subsection}{\numberline {5.3.2}Result}{24}
+\contentsline {subsection}{\numberline {5.3.3}Analysis}{25}
+\contentsline {section}{\numberline {5.4}Experiment 2: Understanding usage pattern by using time-series}{25}
+\contentsline {subsection}{\numberline {5.4.1}Procedure}{25}
+\contentsline {subsection}{\numberline {5.4.2}Result}{25}
+\contentsline {subsection}{\numberline {5.4.3}Analysis}{26}
+\contentsline {section}{\numberline {5.5}Experiment 3: Workload predication}{27}
+\contentsline {subsection}{\numberline {5.5.1}ETL workload prediction}{28}
+\contentsline {subsubsection}{\numberline {5.5.1.1}Aims}{28}
+\contentsline {subsubsection}{\numberline {5.5.1.2}Result}{28}
+\contentsline {subsubsection}{\numberline {5.5.1.3}Analysis}{30}
+\contentsline {subsubsection}{\numberline {5.5.1.4}Model Evaluation}{30}
+\contentsline {section}{\numberline {5.6}Experiment 4: Anomaly detection}{31}
+\contentsline {subsection}{\numberline {5.6.1}Classification problem}{31}
+\contentsline {subsubsection}{\numberline {5.6.1.1}Aims}{31}
+\contentsline {subsubsection}{\numberline {5.6.1.2}Result}{31}
+\contentsline {subsubsection}{\numberline {5.6.1.3}Analysis}{31}
+\contentsline {subsubsection}{\numberline {5.6.1.4}Model Evaluation}{33}
+\contentsline {chapter}{\numberline {6}Discussion and Conclusion}{34}
+\contentsline {section}{\numberline {6.1}Discussion}{34}
+\contentsline {section}{\numberline {6.2}Conclusion}{34}

@@ -3,44 +3,54 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: agsm.bst
 Database file #1: thesis.bib
-You've used 3 entries,
+Repeated entry---line 156 of file thesis.bib
+ : @mastersthesis{zwietasch2014detecting
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 164 of file thesis.bib
+ : @article{ma2003log
+ :                   ,
+I'm skipping whatever remains of this entry
+Warning--empty school in zwietasch2014detecting
+You've used 17 entries,
             2909 wiz_defined-function locations,
-            655 strings with 5056 characters,
-and the built_in function-call counts, 10815 in all, are:
-= -- 1742
-> -- 139
+            731 strings with 7515 characters,
+and the built_in function-call counts, 66483 in all, are:
+= -- 10667
+> -- 992
 < -- 1
-+ -- 826
-- -- 42
-* -- 910
-:= -- 2225
-add.period$ -- 3
-call.type$ -- 3
-change.case$ -- 40
-chr.to.int$ -- 3
-cite$ -- 3
-duplicate$ -- 48
-empty$ -- 90
-format.name$ -- 49
-if$ -- 1925
++ -- 5059
+- -- 301
+* -- 5661
+:= -- 13432
+add.period$ -- 17
+call.type$ -- 17
+change.case$ -- 236
+chr.to.int$ -- 17
+cite$ -- 18
+duplicate$ -- 319
+empty$ -- 590
+format.name$ -- 348
+if$ -- 11977
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 5
-newline$ -- 12
-num.names$ -- 31
-pop$ -- 19
+missing$ -- 19
+newline$ -- 54
+num.names$ -- 179
+pop$ -- 96
 preamble$ -- 1
-purify$ -- 45
+purify$ -- 255
 quote$ -- 0
-skip$ -- 34
+skip$ -- 276
 stack$ -- 0
-substring$ -- 2451
-swap$ -- 6
-text.length$ -- 43
+substring$ -- 14950
+swap$ -- 76
+text.length$ -- 239
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
-warning$ -- 0
-while$ -- 65
+type$ -- 62
+warning$ -- 1
+while$ -- 383
 width$ -- 0
-write$ -- 41
+write$ -- 235
+(There were 2 error messages)
