@@ -9,6 +9,8 @@ from sklearn.model_selection import train_test_split
 # import module to calculate model perfomance metrics
 from sklearn import metrics
 
+import json
+
 sns.set()
 
 dataPath = "../../datafiles/workload_prediction_data.csv"
@@ -17,7 +19,15 @@ dataset = pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
 
 #print dataset.head()
 #print dataset.shape
-print dataset.describe()
+xx = dataset.describe()
+print type(xx)
+
+someVal = isinstance(xx, pd.core.frame.DataFrame)
+
+print someVal
+
+# write stats to JSON file
+xx.to_json("workloadmetrics.json")
 
 #select all the rows of the first and third columns/attributes
 
