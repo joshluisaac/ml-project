@@ -11,7 +11,7 @@ from sklearn import metrics
 
 sns.set()
 
-dataPath = "/home/joshua/Desktop/datascience/data_analysis_2/workload_prediction_8k.csv"
+dataPath = "../../datafiles/workload_prediction_data.csv"
 colNames = ['Payload','RunningTime','Throughput/sec']
 dataset = pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
 
