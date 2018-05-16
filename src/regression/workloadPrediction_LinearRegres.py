@@ -8,6 +8,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 # import module to calculate model perfomance metrics
 from sklearn import metrics
+import pickle
 
 import json
 
@@ -18,26 +19,42 @@ dataPath = "/media/joshua/martian/staffordshireUniversity/phd-thesis/datafiles/w
 colNames = ['Payload','RunningTime','ThroughputPersec']
 #dataset = pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
 
-def loadPredictionDataSet(dataPath, colNames):
+def load_dataset(dataPath, colNames):
     """Will load all the data points in the training data set returning a panda data frame
     This will be used for the model prediction
     """
     return pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
 
 
-dataset = loadPredictionDataSet(dataPath,colNames)
+dataset = load_dataset(dataPath,colNames)
 
-#print dataset.head()
-#print dataset.shape
-statsSummary = dataset.describe()
-#print type(statsSummary)
 
-checkType = isinstance(statsSummary, pd.core.frame.DataFrame)
+def get_dataframe_head(n):
+    """ Returns first n rows of the DataFrame"""
+    return dataset.head(n)
 
-#print checkType
+def get_dataframe_tail(n):
+    """ Returns last n rows of the DataFrame"""
+    return dataset.tail(n)
 
-# write stats summary to JSON file
-statsSummary.to_json("workloadmetrics.json")
+def get_dataframe_shape():
+    """Returns the number of rows and columns"""
+    return dataset.shape()
+
+def get_summary():
+    """Returns the statistical metrics"""
+    return dataset.describe()
+
+
+stats_summary = get_summary()
+
+
+checkType = isinstance(stats_summary, pd.core.frame.DataFrame)
+
+
+# Stream stats summary to JSON formatted file
+stats_summary.to_json("workloadmetrics.json")
+print "Wrote file to disk"
 
 #select all the rows of the first and third columns/attributes
 # through put per sec
@@ -77,14 +94,15 @@ xTest1D = X_test.ravel()
 
 
 #intercept also known as bias B0
-print("Constant/Intercept: ", linreg.intercept_)
+intercept = linreg.intercept_
+print("Constant/Intercept: ", intercept)
 
 # coefficient of x, also known as the slope of the graph.
 # y = mx + c
 # Denoted as B1
-print("Slope of the graph: ",linreg.coef_)
+xCoef = linreg.coef_
+print("Slope of the graph: ",xCoef)
 
-#print linreg.coef_[0]
 
 df = pd.DataFrame({'Through put per sec': xTest1D, 'Actual': y_test, 'Predicted': y_pred}) 
 
@@ -98,8 +116,16 @@ print("MAE: {}".format(meanAbsoluteError))
 print("MSE: {}".format(meanSquaredError))
 print("RMSE: {}".format(rootMeanSquaredError))
 
-def getMetrics():
-    return [linreg.intercept_,linreg.coef_[0],meanAbsoluteError,meanSquaredError,rootMeanSquaredError]
+def get_metrics():
+    metrics_dict = {}
+    metrics_dict['intercept'] = intercept
+    metrics_dict['x_coefficient'] = xCoef[0]
+    metrics_dict['mean_absolute_error'] = meanAbsoluteError
+    metrics_dict['mean_squared_error'] = meanSquaredError
+    metrics_dict['root_mean_squared'] = rootMeanSquaredError
+    #[intercept,xCoef[0],meanAbsoluteError,meanSquaredError,rootMeanSquaredError]
+    return metrics_dict
+
 
 #dataset.plot(x="Throughput/sec", y="RunningTime", style=".")
 
@@ -120,3 +146,12 @@ sns.regplot(x=xTest1D, y=y_test, color="green", marker="*")
 plt.xlabel('Payload through put per sec')
 plt.ylabel('Running Time (sec)')
 #plt.show()
+
+
+filename = 'finalized_model.sav'
+pickle.dump(linreg, open(filename, 'wb'))
+
+
+loaded_model = pickle.load(open(filename, 'rb'))
+result = loaded_model.score(X_test, y_test)
+print(result)
