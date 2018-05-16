@@ -13,25 +13,33 @@ import json
 
 sns.set()
 
-dataPath = "../../datafiles/workload_prediction_data.csv"
-colNames = ['Payload','RunningTime','Throughput/sec']
-dataset = pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
+
+dataPath = "/media/joshua/martian/staffordshireUniversity/phd-thesis/datafiles/workload_prediction_data.csv"
+colNames = ['Payload','RunningTime','ThroughputPersec']
+#dataset = pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
+
+def loadPredictionDataSet(dataPath, colNames):
+    """Will load all the data points in the training data set returning a panda data frame
+    This will be used for the model prediction
+    """
+    return pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
+
+
+dataset = loadPredictionDataSet(dataPath,colNames)
 
 #print dataset.head()
 #print dataset.shape
-xx = dataset.describe()
-print type(xx)
+statsSummary = dataset.describe()
+#print type(statsSummary)
 
-someVal = isinstance(xx, pd.core.frame.DataFrame)
+checkType = isinstance(statsSummary, pd.core.frame.DataFrame)
 
-print someVal
+#print checkType
 
-# write stats to JSON file
-xx.to_json("workloadmetrics.json")
+# write stats summary to JSON file
+statsSummary.to_json("workloadmetrics.json")
 
 #select all the rows of the first and third columns/attributes
-
-
 # through put per sec
 # x-axis is expected to be a 2D array and not 1D array
 xAxis = dataset.iloc[:,[2]].values
@@ -71,9 +79,12 @@ xTest1D = X_test.ravel()
 #intercept also known as bias B0
 print("Constant/Intercept: ", linreg.intercept_)
 
-# coefficient of x, also knwon as the slope of the graph.
+# coefficient of x, also known as the slope of the graph.
+# y = mx + c
 # Denoted as B1
 print("Slope of the graph: ",linreg.coef_)
+
+#print linreg.coef_[0]
 
 df = pd.DataFrame({'Through put per sec': xTest1D, 'Actual': y_test, 'Predicted': y_pred}) 
 
@@ -86,6 +97,9 @@ meanSquaredError = metrics.mean_squared_error(y_test, y_pred)
 print("MAE: {}".format(meanAbsoluteError))
 print("MSE: {}".format(meanSquaredError))
 print("RMSE: {}".format(rootMeanSquaredError))
+
+def getMetrics():
+    return [linreg.intercept_,linreg.coef_[0],meanAbsoluteError,meanSquaredError,rootMeanSquaredError]
 
 #dataset.plot(x="Throughput/sec", y="RunningTime", style=".")
 
@@ -105,4 +119,4 @@ sns.regplot(x=xTest1D, y=y_test, color="green", marker="*")
 #plt.title('Payload vs Running Time')
 plt.xlabel('Payload through put per sec')
 plt.ylabel('Running Time (sec)')
-plt.show()
+#plt.show()
