@@ -15,6 +15,8 @@ from sklearn.svm import SVC
 import pickle
 
 file_path_url = "/media/joshua/martian/staffordshireUniversity/phd-thesis/datafiles/customerInvoiceDataPred.vec"
+out_path = "/media/joshua/martian/staffordshireUniversity/mlthesis/out"
+predicted_data_name = "data_pred.csv"
 
 def read_prediction_dataset(file_path):
     """Loads the prediction data set and returns a numpy array
@@ -22,8 +24,9 @@ def read_prediction_dataset(file_path):
     Read prediction data set
     """
     names = ['CustomerId_PKEY','CustomerName_OPT','InvoiceDate_NN','InvoiceStatus_OPT','label']
-    dataset_prediction = pd.read_csv(file_path, sep='|', names=names)
-    dataset_prediction.describe().to_json("gaussian_pred.json")
+    dataset_prediction = pd.read_csv(file_path, sep='|', names=names, nrows=5000)
+    
+    dataset_prediction.describe().to_json(out_path + "/" + "gaussian_pred.json")
     return dataset_prediction.iloc[:, :-1].values
 
 
@@ -61,14 +64,14 @@ def get_pred_metrics(model_type,pred_data):
     prediction_map['prediction_file_length'] = len(pred_data)
     prediction_map['model_type'] = "sklearn.naive_bayes.GaussianNB"
     prediction_map['model_name'] = model_name
-    return json.dumps(prediction_map)
+    return prediction_map
 
 
 def run_app():
     prediction_data = read_prediction_dataset(file_path_url)
     loaded_model = load_saved_model(model_file_name)
     pred_data = predict(loaded_model,prediction_data)
-    stream_prediction_data_to_csv(pred_data,'data_pred.csv')
+    stream_prediction_data_to_csv(pred_data,out_path +"/"+ predicted_data_name)
     result = get_pred_metrics(loaded_model,pred_data)
     return result
 

@@ -16,6 +16,10 @@ sns.set()
 
 
 dataPath = "/media/joshua/martian/staffordshireUniversity/phd-thesis/datafiles/workload_prediction_data.csv"
+model_file_path = '/media/joshua/martian/staffordshireUniversity/phd-thesis/models'
+model_name = 'regres_finalized_model.sav'
+out_path = "/media/joshua/martian/staffordshireUniversity/mlthesis/out" 
+workload_pred = "workload_pred.json"
 colNames = ['Payload','RunningTime','ThroughputPersec']
 #dataset = pd.read_csv(dataPath, delimiter="|", names=colNames, header=None)
 
@@ -53,8 +57,9 @@ checkType = isinstance(stats_summary, pd.core.frame.DataFrame)
 
 
 # Stream stats summary to JSON formatted file
-stats_summary.to_json("workloadmetrics.json")
-print "Wrote file to disk"
+json_out = out_path + "/" + workload_pred
+stats_summary.to_json(json_out)
+print "Created file " + json_out
 
 #select all the rows of the first and third columns/attributes
 # through put per sec
@@ -119,10 +124,10 @@ print("RMSE: {}".format(rootMeanSquaredError))
 def get_metrics():
     metrics_dict = {}
     metrics_dict['intercept'] = intercept
-    metrics_dict['x_coefficient'] = xCoef[0]
-    metrics_dict['mean_absolute_error'] = meanAbsoluteError
-    metrics_dict['mean_squared_error'] = meanSquaredError
-    metrics_dict['root_mean_squared'] = rootMeanSquaredError
+    metrics_dict['coefficient'] = xCoef[0]
+    metrics_dict['mae'] = meanAbsoluteError
+    metrics_dict['mse'] = meanSquaredError
+    metrics_dict['rms'] = rootMeanSquaredError
     #[intercept,xCoef[0],meanAbsoluteError,meanSquaredError,rootMeanSquaredError]
     return metrics_dict
 
@@ -147,11 +152,5 @@ plt.xlabel('Payload through put per sec')
 plt.ylabel('Running Time (sec)')
 #plt.show()
 
-
-filename = 'finalized_model.sav'
-pickle.dump(linreg, open(filename, 'wb'))
-
-
-loaded_model = pickle.load(open(filename, 'rb'))
-result = loaded_model.score(X_test, y_test)
-print(result)
+model_path = model_file_path + "/" + model_name
+pickle.dump(linreg, open(model_path, 'wb'))
